@@ -75,6 +75,10 @@ resource "aws_security_group_rule" "ingress_rules" {
   from_port = var.rules[var.ingress_rules[count.index]][0]
   to_port   = var.rules[var.ingress_rules[count.index]][1]
   protocol  = var.rules[var.ingress_rules[count.index]][2]
+  depends_on = [
+    aws_security_group.this,
+    aws_security_group.this_name_prefix
+  ]
 }
 
 # Computed - Security group rules with "cidr_blocks" and it uses list of rules names
